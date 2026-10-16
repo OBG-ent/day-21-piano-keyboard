@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piano Keys — Playable Web Piano</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="stage">
+    <header>
+      <h1>🎹 Piano <span>Keys</span></h1>
+      <p class="sub">A real playable piano in your browser — no downloads, no plugins.</p>
+    </header>
+
+    <!-- Controls: volume + record/playback -->
+    <div class="controls">
+      <label class="vol">
+        🔊 Volume
+        <input type="range" id="volume" min="0" max="100" value="70" />
+      </label>
+      <div class="rec-buttons">
+        <button id="record-btn">⏺ Record</button>
+        <button id="play-btn" disabled>▶ Play</button>
+        <button id="clear-btn" disabled>🗑 Clear</button>
+      </div>
+    </div>
+
+    <!-- The keyboard itself is built by app.js -->
+    <div class="piano-wrap">
+      <div class="piano" id="piano"></div>
+    </div>
+
+    <p class="hint">
+      💡 Tip: play with your computer keyboard too —
+      <kbd>Z</kbd>–<kbd>M</kbd> and <kbd>Q</kbd>–<kbd>U</kbd> map to the white keys,
+      the rows above them to black keys. Record a melody and hit Play!
+    </p>
+
+    <footer>
+      <p id="status">Ready — press a key or click one.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

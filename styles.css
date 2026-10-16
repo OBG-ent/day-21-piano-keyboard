@@ -1,0 +1,94 @@
+/* Piano Keys — a stage-dark look with a glowing gold piano. */
+:root {
+  --bg: #0b0b10;
+  --panel: #15151d;
+  --gold: #f5c518;
+  --gold-soft: #ffe58a;
+  --text: #f1f1f4;
+  --muted: #9a9aad;
+  --danger: #e5484d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: radial-gradient(ellipse at 50% 0%, #1a1a26 0%, var(--bg) 70%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+}
+.stage { width: 100%; max-width: 900px; text-align: center; }
+header h1 { font-size: 2.25rem; letter-spacing: 0.02em; }
+header h1 span { color: var(--gold); }
+.sub { color: var(--muted); margin: 0.35rem 0 1.5rem; }
+
+.controls {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  align-items: center; justify-content: center;
+  background: var(--panel);
+  border: 1px solid #2a2a36;
+  border-radius: 1rem;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.vol { display: flex; align-items: center; gap: 0.6rem; color: var(--muted); font-size: 0.9rem; }
+.vol input { accent-color: var(--gold); width: 130px; }
+.rec-buttons { display: flex; gap: 0.5rem; }
+.rec-buttons button {
+  border: 1px solid #2a2a36; background: #1f1f2a; color: var(--text);
+  border-radius: 0.6rem; padding: 0.5rem 0.9rem; cursor: pointer; font-size: 0.9rem;
+}
+.rec-buttons button:hover:not(:disabled) { border-color: var(--gold); }
+.rec-buttons button:disabled { opacity: 0.4; cursor: not-allowed; }
+#record-btn.recording { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+/* Piano layout: white keys in a row, black keys absolutely positioned on top */
+.piano-wrap {
+  background: var(--panel);
+  border: 1px solid #2a2a36;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+.piano { position: relative; display: inline-flex; user-select: none; }
+.key {
+  cursor: pointer;
+  border-radius: 0 0 6px 6px;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 0.6rem;
+  font-size: 0.7rem; font-weight: 600;
+  transition: transform 0.03s ease, background 0.05s ease;
+}
+.key.white {
+  width: 52px; height: 220px;
+  background: linear-gradient(to bottom, #fafafa, #e8e8e8);
+  border: 1px solid #b9b9c4;
+  color: #555;
+  margin-right: -1px;
+  z-index: 1;
+}
+.key.black {
+  width: 32px; height: 135px;
+  background: linear-gradient(to bottom, #2b2b33, #101016);
+  border: 1px solid #000;
+  color: #bbb;
+  margin: 0 -16px; /* overlap the gap between white keys */
+  z-index: 2;
+}
+.key.active { transform: translateY(2px) scale(0.98); }
+.key.white.active { background: linear-gradient(to bottom, var(--gold-soft), var(--gold)); }
+.key.black.active { background: linear-gradient(to bottom, #6b5a1e, #3a3210); }
+
+.hint { color: var(--muted); font-size: 0.9rem; margin: 1.25rem auto 0; max-width: 640px; line-height: 1.7; }
+kbd {
+  background: #23232e; border: 1px solid #3a3a48; border-bottom-width: 3px;
+  border-radius: 0.35rem; padding: 0.1rem 0.45rem; font-size: 0.8rem;
+}
+footer #status { margin-top: 1rem; color: var(--muted); font-size: 0.85rem; min-height: 1.25rem; }
+
+@media (max-width: 560px) {
+  .key.white { width: 40px; height: 180px; }
+  .key.black { width: 26px; height: 112px; margin: 0 -13px; }
+}
